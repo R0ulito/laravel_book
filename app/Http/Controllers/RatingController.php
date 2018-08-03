@@ -2,24 +2,84 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\Book;
 use App\Rating;
-use App\User;
+use Illuminate\Http\Request;
 
 class RatingController extends Controller
 {
-    public function addRating(Request $request, Book $book) {
-        if(DB::select('select * from ratings where user_id = ? and book_id = ? ', [$request->user()->id, $book->id])){
-            return redirect('/')->with('message', 'Vous avez déjà voté pour ce livre');
-        } else {
-            DB::table('ratings')->insert([
-                "note" => $request->notes,
-                "book_id" => $book->id,
-                "user_id" => $request->user()->id
-            ]);
-        }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        //
+    }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Rating  $rating
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Rating $rating)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Rating  $rating
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Rating $rating)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Rating  $rating
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Rating $rating)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Rating  $rating
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Rating $rating)
+    {
+        //
     }
 }

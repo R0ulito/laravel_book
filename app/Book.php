@@ -43,7 +43,7 @@ class Book extends Model
         return $this->hasOne(Picture::class);
     }
 
-    public function ratings() {
+    public function ratingBookUser() {
         return $this->hasMany(Rating::class);
     }
 

@@ -38,9 +38,9 @@ class FrontController extends Controller
     }
     public function index()
     {
-        $ratings = DB::select('select * from ratings');
+//        $ratings = DB::select('select * from ratings');
         $books = Book::published()->paginate(5);
-        return view('front.index', ['books' => $books, 'ratings' => $ratings]);
+        return view('front.index', ['books' => $books]);
     }
 
     /**
