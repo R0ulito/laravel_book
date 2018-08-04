@@ -38,6 +38,9 @@ class BookTableSeeder extends Seeder
 
             $authors = App\Author::pluck('id')->shuffle()->slice(0,rand(1,3))->all();
 
+            $user = App\User::find(rand(1,3));
+
+            $user->books()->attach([$book->id], ['rate' => rand(3,5)]);
 
             $book->authors()->attach($authors);
 

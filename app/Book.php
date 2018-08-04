@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use App\Rating;
 
 class Book extends Model
 {
@@ -43,10 +44,9 @@ class Book extends Model
         return $this->hasOne(Picture::class);
     }
 
-    public function ratingBookUser() {
-        return $this->hasMany(Rating::class);
+    public function users(){
+        return $this->belongsToMany(User::class, 'rating')->withPivot('rate');
     }
-
     public function isChecked(int $checkedId){
         if($this->authors){
             foreach($this->authors()->pluck('id') as $id ){
@@ -57,8 +57,19 @@ class Book extends Model
         return false;
     }
 
-    public function getAverageRating(Book $book) {
-        $notes = DB::select('select avg(note) from ratings where book_id = ?', [$book->id]);
-        return $notes;
+    public function getTotalRatings() {
+        return Rating::all()->where('book_id', '=', $this->id)->sum('rate');
+//        return ;
+    }
+
+    public function getAverageRating() {
+        $total = $this->getTotalRatings();
+        $result = 0;
+        if($total > 0) {
+            $count = Rating::all()->where('book_id', '=', $this->id);
+            $result = $total / count($count);
+        }
+        return round($result, 2);
+
     }
 }

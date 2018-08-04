@@ -27,7 +27,7 @@
                 {{--{{dd(Auth::user()->elevation, Request::ip())}}--}}
                 <li class="list-group-item">
                     <h4>Notez ce livre</h4>
-                    @include('partials.note')
+                    @include('front.partials.note', ['rating' => $book->getAverageRating()])
                 </li>
             @endif
             @empty
@@ -47,9 +47,10 @@
     <script>
         // $('input').hide()
         $('.far').on('click', function() {
-            var selector = "#" + $(this).parent().attr('for');
-            $(selector).attr('checked', true);
-            $('form#note_form').submit();
+            var selector = "." + $(this).parent().attr('for');
+            var parentCheckbox = $(this).parent().prev(selector);
+            parentCheckbox.attr('checked', true);
+            parentCheckbox.parent().parent('form').submit();
 
         })
     </script>

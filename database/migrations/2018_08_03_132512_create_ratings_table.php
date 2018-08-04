@@ -13,11 +13,12 @@ class CreateRatingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('ratings', function (Blueprint $table) {
+        Schema::create('rating', function (Blueprint $table) {
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('book_id');
-            $table->unsignedInteger('note');
-            $table->primary(['book_id', 'user_id']);
+            $table->tinyInteger('rate')->default(0);
+
+            $table->unique(['user_id', 'book_id']); // unique pour les votes
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('book_id')->references('id')->on('books')->onDelete('cascade');
@@ -31,6 +32,6 @@ class CreateRatingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ratings');
+        Schema::dropIfExists('rating');
     }
 }

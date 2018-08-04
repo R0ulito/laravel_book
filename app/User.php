@@ -27,8 +27,21 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function books()
+    {
+        return $this->belongsToMany(Book::class,'rating')->withPivot('rate');
+    }
+
     public function isAdmin()
     {
         return $this->elevation === "admin";
+    }
+
+    public function rate():int{
+        $rate = 0 ;
+        foreach($this->books as $book )
+            $rate+=$book->pivot->rate ;
+
+        return $rate;
     }
 }

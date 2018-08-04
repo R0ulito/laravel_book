@@ -15,7 +15,7 @@
 
 Route::get('/', 'FrontController@index')->name('index');
 
-Route::post('/book/{book}/rate', 'RatingController@addRating')->middleware('auth')->name('rate');
+Route::post('/book/{book}/rate', 'RatingController@store')->middleware('auth')->name('rate');
 
 
 

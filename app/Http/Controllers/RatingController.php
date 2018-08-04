@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Rating;
 use Illuminate\Http\Request;
+use App\Rating;
+use App\Book;
+use App\User;
 
 class RatingController extends Controller
 {
@@ -33,9 +35,15 @@ class RatingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Book $book)
     {
-        //
+        foreach ($book->users()->pluck('id') as $id) {
+            if ($id === $request->user()->id) {
+                return redirect('/')->with('message', 'Bah non gros t\'as déjà voté');
+            }
+        }
+        return "Non";
+//        dd($book->users()->pluck('id'),  $request->user()->id);
     }
 
     /**

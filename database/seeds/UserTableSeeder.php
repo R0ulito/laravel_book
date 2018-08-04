@@ -26,6 +26,13 @@ class UserTableSeeder extends Seeder
                     'password' => Hash::make('Azerty77'),
                     'elevation' => "user"
 
+                ],
+                [
+                    'name' => 'amelie',
+                    'email' => 'amelie@lem.com',
+                    'password' => Hash::make('Azerty77'),
+                    'elevation' => "user"
+
                 ]
             ]
         );
