@@ -39,7 +39,7 @@ class RatingController extends Controller
     {
         foreach ($book->users()->pluck('id') as $id) {
             if ($id === $request->user()->id) {
-                return redirect('/')->with('message', 'Bah non gros t\'as déjà voté');
+                return redirect('/')->with('message', 'Tu as déjà voté pour ce livre');
             }
         }
         return "Non";

@@ -44,6 +44,13 @@
 
 @section('scripts')
     @parent
+    @if(Session::has('message'))
+        <script>
+            swal('{{Session::get('message')}}')
+        </script>
+    @endif
+
+
     <script>
         // $('input').hide()
         $('.far').on('click', function() {

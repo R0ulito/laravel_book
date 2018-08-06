@@ -1,4 +1,10 @@
-{{$rating}}
+@if(Auth::user()->id)
+    @foreach($book->users as $user)
+        @if(Auth::user()->id === $user->pivot->user_id)
+            Déjà voté
+        @endif
+    @endforeach
+@endif
 
 <form action="{{route('rate', ['id' => $book->id])}}" method="post" id="note_form">
     @csrf
@@ -35,4 +41,3 @@
     </div>
 </form>
 
-@include('partials.flash')
