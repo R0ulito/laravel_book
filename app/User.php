@@ -44,4 +44,13 @@ class User extends Authenticatable
 
         return $rate;
     }
+
+    public function canRate(int $bookId) {
+
+        foreach($this->books as $book){
+            if($this->id == $book->user_id and $bookId == $book->id)
+                return false;
+        }
+        return true;
+    }
 }

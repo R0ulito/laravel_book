@@ -69,7 +69,7 @@ class Book extends Model
             $count = Rating::all()->where('book_id', '=', $this->id);
             $result = $total / count($count);
         }
-        return round($result, 2);
+        return round($result, 1);
 
     }
 }

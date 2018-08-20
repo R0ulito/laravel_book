@@ -42,8 +42,15 @@ class RatingController extends Controller
                 return redirect('/')->with('message', 'Tu as déjà voté pour ce livre');
             }
         }
-        return "Non";
+
+        $rating = new Rating();
+        $rating->user_id = $request->user()->id;
+        $rating->book_id = $book->id;
+        $rating->rate = $request->notes;
+//        return "Non";
 //        dd($book->users()->pluck('id'),  $request->user()->id);
+        $rating->save();
+        return redirect('/')->with('success', 'Ton vote a bien été pris en compte');
     }
 
     /**

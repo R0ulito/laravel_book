@@ -49,6 +49,12 @@
             swal('{{Session::get('message')}}')
         </script>
     @endif
+    @if(Session::has('success'))
+        <script>
+            swal('{{Session::get('success')}}')
+        </script>
+    @endif
+
 
 
     <script>

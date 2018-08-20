@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Rating extends Model
 {
+    public $timestamps = false;
 
     protected $table = "book.rating";
     public function user() {
