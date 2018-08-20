@@ -23,12 +23,18 @@
                     @endforelse
                 </ul>
             </li>
-            @if(Auth::check())
-                {{--{{dd(Auth::user()->elevation, Request::ip())}}--}}
+            @if(Auth::check() && !Auth::user()->hasRate($book->id))
+
                 <li class="list-group-item">
                     <h4>Notez ce livre</h4>
-                    @include('front.partials.note', ['rating' => $book->getAverageRating()])
+                    @include('front.partials.note')
                 </li>
+
+                @else
+                <li class="list-group-item">
+                    @include('front.partials.rating', ['rating' => $book->getAverageRating()])
+                </li>
+
             @endif
             @empty
                 <p class="alert alert-warning">Désolé pour l'instant aucun livres n'ont été publiés sur le site</p>

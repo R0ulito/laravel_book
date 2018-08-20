@@ -45,12 +45,14 @@ class User extends Authenticatable
         return $rate;
     }
 
-    public function canRate(int $bookId) {
+    public function ratings(){
+        return $this->hasMany(Rating::class);
+    }
 
-        foreach($this->books as $book){
-            if($this->id == $book->user_id and $bookId == $book->id)
-                return false;
+    public function hasRate(int $bookId) {
+        foreach( $this->ratings as $rating){
+            if($rating->book_id === $bookId) return true;
         }
-        return true;
+        return false;
     }
 }
